@@ -6,6 +6,7 @@ const fs = require('fs')
 
 // app.use(cors())
 
+
 io.on('connection', socket => {
   console.log('a user connected');
   const cursorPositions = []
@@ -79,8 +80,8 @@ io.on('connection', socket => {
   });
 });
 
-http.listen(3001, function(){
-  console.log('listening on *:3001');
+http.listen(process.env.PORT || 3000, () =>{
+  console.log('Im the server and ill be runnin');
 });
 
 
