@@ -6,14 +6,6 @@ const fs = require('fs')
 
 // app.use(cors())
 
-
-// app.get('/', function(req, res){
-//   // res.sendFile(__dirname + '/index.html');
-//   console.log(res)
-// });
-
-
-
 io.on('connection', socket => {
   console.log('a user connected');
   const cursorPositions = []
@@ -38,20 +30,13 @@ io.on('connection', socket => {
     }
 
     fs.readFile('./hoverData.json',  (err,body) => {
-      // console.log('typeof Data!', typeof body)
-      // console.log('data before parsing:', body)
-      // if (err) throw err
       let validateJson = (body) => {
         try{
           let data = JSON.parse(body)
           return data
         } catch(e) {
-
           console.log('oops')
-          // let data = body.substring(1, body.length-1)
-          // console.log('data weird', data)
           let data = new Array;
-          // this.heatmap._data.push(coords.slice(-1)[0])
           console.log('error:', e)
           return data
         }
@@ -60,8 +45,6 @@ io.on('connection', socket => {
       if (err) throw err
       let data = validateJson(body)
       if (data){
-        // console.log('data after parsing:', data)
-        // console.log(file.length)
         if (data.length >= 150) {
           data.shift()
         } else {
