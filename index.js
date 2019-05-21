@@ -11,7 +11,7 @@ io.on('connection', socket => {
   console.log('a user connected');
   socket.on('load history', ()=> {
       socket.emit('here you go', coords)
-      // console.log('on loading history coords.length is:', coords.length)
+      console.log('on loading history coords.length is:', coords.length)
   })
   socket.on("hell", (msg)=> {
     // console.log('when its hell coords.length is:', coords.length)
