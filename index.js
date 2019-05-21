@@ -7,8 +7,14 @@ let io = require('socket.io')(http)
 
 let coords = []
 
+
+
 io.on('connection', socket => {
   console.log('a user connected');
+  io.clients((error, clients) => {
+    if (error) throw error;
+    console.log('connected clients:', clients); 
+  });
   socket.on('load history', ()=> {
       socket.emit('here you go', coords)
       console.log('on loading history coords.length is:', coords.length)
