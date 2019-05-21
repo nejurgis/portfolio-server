@@ -14,6 +14,7 @@ io.on('connection', socket => {
   io.clients((error, clients) => {
     if (error) throw error;
     console.log('connected clients:', clients); 
+    console.log('connected client number:', clients.length); 
   });
   socket.on('load history', ()=> {
       socket.emit('here you go', coords)
@@ -37,6 +38,10 @@ io.on('connection', socket => {
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    io.clients((error, clients) => {
+      if (error) throw error;
+      console.log('connected client number:', clients.length); 
+    });
   });
 });
 
