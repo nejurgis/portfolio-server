@@ -36,6 +36,10 @@ io.on('connection', socket => {
 
   })
 
+  socket.on("manual-disconnection", function(data) {
+    console.log("User Manually Disconnected. \n\tTheir ID: " + data);
+});
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
     io.clients((error, clients) => {
