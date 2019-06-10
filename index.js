@@ -9,7 +9,7 @@ let coords = []
 
 
 
-io.on('connection', socket => {
+io.on('connection', socket => { 
   console.log('a user connected');
   io.clients((error, clients) => {
     if (error) throw error;
@@ -18,12 +18,28 @@ io.on('connection', socket => {
   });
   socket.on('load history', ()=> {
       socket.emit('here you go', coords)
+      
       console.log('on loading history coords.length is:', coords.length)
+  })
+
+  socket.on('moving', ()=> {
+    // io.clients((error, clients) => {
+      // if (error) throw error;
+      socket.broadcast.emit('moving', socket.id)
+    // });
+    // console.log('got the mousemove')
+    
+
+  })
+
+  socket.on('notMoving', ()=> {
+    socket.broadcast.emit('notMoving')
+
   })
   socket.on("hell", (msg)=> {
     // console.log('when its hell coords.length is:', coords.length)
 
-    if (coords.length >= 700) {
+    if (coords.length >= 300) {
       coords.shift()
       // console.log('shifted the coords')
     } else {
@@ -38,6 +54,8 @@ io.on('connection', socket => {
 
   socket.on("manual-disconnection", function(data) {
     console.log("User Manually Disconnected. \n\tTheir ID: " + data);
+    socket.broadcast.emit('moverDisconnected', data)
+
 });
 
   socket.on('disconnect', function(){
