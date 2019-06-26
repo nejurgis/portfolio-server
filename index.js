@@ -1,5 +1,6 @@
 let app = require('express')()
 let http = require('http').Server(app)
+var httpPing = require("http");
 let io = require('socket.io')(http)
 
 
@@ -7,7 +8,10 @@ let io = require('socket.io')(http)
 
 let coords = []
 
-
+// Refreshing the dyno
+setInterval(function() {
+    httpPing.get("http://jurgioserveris.herokuapp.com");
+}, 300000); // every 5 minutes (300000)
 
 io.on('connection', socket => { 
   console.log('a user connected');
