@@ -10,7 +10,7 @@ let coords = []
 
 // Refreshing the dyno
 setInterval(function() {
-    httpPing.get("http://jurgioserveris.herokuapp.com");
+    httpPing.get("https://jurgioserveris.herokuapp.com");
 }, 300000); // every 5 minutes (300000)
 
 io.on('connection', socket => { 
